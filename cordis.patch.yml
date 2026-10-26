@@ -1,0 +1,4 @@
+- insert:
+    - id: dsh-tray-restart
+      name: 'dsh-plugin-tray-restart'
+      config: {}

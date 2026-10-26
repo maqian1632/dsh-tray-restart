@@ -1,0 +1,61 @@
+{
+  "name": "dsh-plugin-tray-restart",
+  "version": "1.0.0",
+  "private": false,
+  "description": "Adds a “Restart DeepSeek Harness” item to the Windows system tray menu, closing and relaunching the desktop app.",
+  "type": "module",
+  "main": "./index.js",
+  "license": "MIT",
+  "author": "maqian1632",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maqian1632/dsh-tray-restart.git"
+  },
+  "homepage": "https://github.com/maqian1632/dsh-tray-restart#readme",
+  "bugs": {
+    "url": "https://github.com/maqian1632/dsh-tray-restart/issues"
+  },
+  "keywords": [
+    "deepseek",
+    "harness",
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "tray",
+    "restart",
+    "windows"
+  ],
+  "engines": {
+    "dsh": ">=0.2.1-rc.3 <0.3.0"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "tray-patch.js",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "docs",
+    "assets/icon-180.png",
+    "assets/icon-512.png",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "test",
+    "scripts"
+  ],
+  "scripts": {
+    "test": "node test/tray-patch.test.mjs",
+    "check:install": "node scripts/check-install.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

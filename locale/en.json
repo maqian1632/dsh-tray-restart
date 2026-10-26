@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Tray Restart",
+    "description": "Adds a “Restart DeepSeek Harness” item to the Windows system tray menu."
+  }
+}

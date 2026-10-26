@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "托盘重启",
+    "description": "在 Windows 系统托盘菜单中增加“重启 DeepSeek Harness”，一键关闭并重新启动桌面应用。"
+  }
+}
