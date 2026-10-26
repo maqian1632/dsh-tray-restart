@@ -1,5 +1,7 @@
 # DSH Tray Restart
 
+<img src="assets/icon-180.png" width="96" height="96" alt="Tray Restart icon" align="right">
+
 在 Windows 系统托盘菜单中增加 **重启 DeepSeek Harness**，一键关闭并重新启动整个桌面应用。
 
 ```text
