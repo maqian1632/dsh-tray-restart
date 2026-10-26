@@ -30,7 +30,7 @@
 
 仓库地址：<https://github.com/maqian1632/dsh-tray-restart>
 
-在 DSH 插件管理中选择从 GitHub 安装，或把仓库克隆到本地后按下一节从本地目录安装。
+让 Agent 使用 `plugin_manager` 从该 GitHub 仓库安装，或把仓库克隆到本地后按下一节从本地目录安装。
 
 ### 从本地目录安装
 
