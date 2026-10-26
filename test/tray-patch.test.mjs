@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import vm from 'node:vm';
 import { patchDesktopMain, TRAY_RESTART_MARKER } from '../tray-patch.js';
 
 const STOCK_REGION_LENGTH = 1253;
@@ -121,4 +122,47 @@ test('upgrades the previous short restart label in place', () => {
 test('rejects a shell that no longer exposes the restart primitives', () => {
   const unsupported = Buffer.from('var DesktopTray = class {};');
   assert.throws(() => patchDesktopMain(unsupported), /not supported/);
+});
+
+test('the patched tray builds the named restart menu item', () => {
+  const patched = patchDesktopMain(makeStockMain()).source.toString('utf8');
+  const start = patched.indexOf('//#region lib/types/tray.js');
+  const end = patched.indexOf('//#endregion', start) + '//#endregion'.length;
+  const region = patched.slice(start, end);
+
+  const calls = { relaunch: 0, quit: 0, open: 0, menu: undefined };
+  class Tray {
+    on() {}
+    setToolTip() {}
+    setContextMenu(menu) { calls.menu = menu; }
+    destroy() {}
+  }
+  const context = {
+    Tray,
+    nativeImage: { createFromPath: (path) => ({ path }) },
+    Menu: { buildFromTemplate: (template) => template },
+    app: { relaunch: () => { calls.relaunch += 1; } },
+    quitWithoutConfirmation: () => { calls.quit += 1; },
+    console,
+  };
+  vm.createContext(context);
+  vm.runInContext(region, context);
+  const tray = new context.DesktopTray({
+    iconPath: 'tray.ico',
+    locale: () => ({ messages: {
+      aboutProduct: 'DeepSeek Harness',
+      openApplication: '打开 DeepSeek Harness',
+      restartApplication: '重启',
+      quitApplication: '退出 DeepSeek Harness',
+    } }),
+    open: () => { calls.open += 1; },
+    quit: () => { calls.quit += 1; },
+  });
+  const labels = calls.menu.map((item) => item.label ?? item.type);
+  assert.equal(labels.join('|'), '打开 DeepSeek Harness|重启 DeepSeek Harness|separator|退出 DeepSeek Harness');
+  const restart = calls.menu.find((item) => item.label === '重启 DeepSeek Harness');
+  restart.click();
+  assert.equal(calls.relaunch, 1);
+  assert.equal(calls.quit, 1);
+  assert.equal(typeof tray.relabel, 'function');
 });
