@@ -24,6 +24,12 @@
 
 插件上架后，在 DSH 的 **插件 → 发现 / 插件市场** 搜索“Tray Restart”并安装。
 
+### 从 GitHub 安装
+
+仓库地址：<https://github.com/maqian1632/dsh-tray-restart>
+
+在 DSH 插件管理中选择从 GitHub 安装，或把仓库克隆到本地后按下一节从本地目录安装。
+
 ### 从本地目录安装
 
 在 DSH 插件管理中使用 `plugin_manager` 安装本目录：
@@ -90,6 +96,9 @@ node --check tray-patch.js
 
 # 单元测试（补丁、幂等、旧版升级、兼容性拒绝）
 npm test
+
+# 检查本机安装是否已打补丁、文案是否正确、asar 完整性是否匹配
+npm run check:install -- "C:\Users\<you>\AppData\Local\Programs\DeepSeek Harness\resources\app.asar"
 ```
 
 测试只构造内存中的 shell 片段，不会修改本机 `app.asar`。
