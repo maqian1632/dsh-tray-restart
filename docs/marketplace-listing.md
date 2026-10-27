@@ -6,7 +6,7 @@ DSH 插件市场（`dshmarket` / dshmarket.com）的插件列表来自精选仓�
 
 - GitHub 仓库：<https://github.com/maqian1632/dsh-tray-restart>（已发布 v1.0.0）
 - 市场 fork 分支：`maqian1632/awesome-dsh-plugin:add-dsh-tray-restart`（条目已提交并推送）
-- 市场 PR：按 awesome-dsh-plugin 规则，仓库创建需满 1 天；计划在 2026-10-27 12:10（Asia/Shanghai）后创建 PR。
+- 市场 PR：[awesome-dsh-plugin#9746](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/9746)，CI `check` 已通过，等待维护者审核。
 
 ## 简短说明（市场卡片）
 
